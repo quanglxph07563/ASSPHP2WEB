@@ -1,0 +1,19 @@
+{
+    "name": "ass/quang",
+    "authors": [
+        {
+            "name": "Quang Le",
+            "email": "quang268200@gmail.com"
+        }
+    ],
+    "require": {
+        "phroute/phroute": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Commons\\": "commons/",
+            "Controllers\\": "controllers/",
+            "Models\\": "models/"
+        }
+    }
+}
