@@ -51,7 +51,7 @@
     </style>
 
 
-    <form id="add-product-form" action="{{BASE_URL . 'products/save-add-product'}}" method="post" enctype="multipart/form-data">
+    <form id="add-product-form" action="<?php echo BASE_URL . 'save-add-brand'?>" method="post" enctype="multipart/form-data">
         <h3>Thêm mới sản phẩm</h3>
         <div class="row col-md-6 mx-auto">
             <div class="col-md-12">
@@ -136,7 +136,7 @@
                     required: true,
                     rangelength: [4, 100],
                     remote: {
-                        url: "{{BASE_URL .'products/check-product-name'}}",
+                        url: "<?php echo BASE_URL .'check-brand-name'?>",
                         type: "post",
                         data: {
                             name: function()

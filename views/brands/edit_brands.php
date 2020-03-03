@@ -51,24 +51,25 @@
     </style>
 
 
-    <form id="add-product-form" action="{{BASE_URL . 'products/save-add-product'}}" method="post" enctype="multipart/form-data">
+    <form id="add-product-form" action="<?php echo BASE_URL . 'save-edit-brand'?>" method="post" enctype="multipart/form-data">
         <h3>Thêm mới sản phẩm</h3>
         <div class="row col-md-6 mx-auto">
             <div class="col-md-12">
                 <div class="form-group">
                     <label>Tên nhãn hiệu<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="name">
+                    <input type="text" class="form-control" value="<?php echo  $databrand["brand_name"] ?>" name="name">
                 </div>
                
                 <div class="form-group">
                     <label for="">Thành Phố</label>
-                    <input type="text" class="form-control" name="country">
+                    <input type="text" class="form-control" value="<?php echo  $databrand["country"] ?>"name="country">
                 </div>
             </div>
+            <input type="text" name="id" hidden value="<?php echo $id ?>">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-8 offset-2">
-                        <img id="preview-img" src="<?php echo BASE_URL?>public/images/default-image.jpg" class="img-fluid">
+                        <img id="preview-img" src="<?php echo BASE_URL . $databrand["logo"]?>" class="img-fluid">
                     </div>
                 </div>
                 <div class="form-group">
@@ -136,15 +137,25 @@
                     required: true,
                     rangelength: [4, 100],
                     remote: {
-                        url: "{{BASE_URL .'products/check-product-name'}}",
+                        url: "<?php echo BASE_URL .'check-brand-name'?>",
                         type: "post",
                         data: {
                             name: function()
                             {
                                 return $('#add-product-form :input[name="name"]').val();
+                            },
+                            id: function(){
+                                return $( "input[name='id']" ).val();
                             }
                         }
                     }
+                },
+                country:{
+                    required: true,
+                    minlength:2
+                },
+                image: {
+                    extension: "jpg|png|jpeg|gif"
                 }
             },
             // Text của lỗi sẽ hiển thị ra ngoài
@@ -153,6 +164,13 @@
                     required: "Hãy nhập tên sản phẩm",
                     rangelength: "tên sản phẩm nằm trong khoảng 4-10 ký tự",
                     remote: "Tên sản phẩm đã tồn tại"
+                },
+                country:{
+                    required: "Hãy nhập tên thành phố",
+                    minlength: "Tên thành phố phải lớn hơn 2 kí tự"
+                },
+                image: {
+                    extension: "Hãy chọn file định dạng ảnh (jpg|png|jpeg|gif)"
                 }
             }
         });

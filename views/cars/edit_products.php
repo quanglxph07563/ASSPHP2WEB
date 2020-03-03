@@ -51,54 +51,59 @@
     </style>
 
 
-    <form id="add-product-form" action="{{BASE_URL . 'products/save-add-product'}}" method="post" enctype="multipart/form-data">
-        <h3>Thêm mới sản phẩm</h3>
+    <form id="add-product-form" action="<?php echo BASE_URL . 'save-edit-product'?>" method="post" enctype="multipart/form-data">
+        <h3>Cập nhật sản phẩm</h3>
         <div class="row">
             <div class="col-md-6">
           
                 <div class="form-group">
                     <label for="">Danh mục sản phẩm</label>
-                    <select name="cate_id" class="form-control" required>
-                        @foreach ($cates as $ca)
-                        <option value="{{$ca->id}}">{{$ca->cate_name}}</option>
-                        @endforeach
+                    <select name="brand_id" class="form-control" required>
+                    <?php
+                        foreach ($data as $value) {
+                            ?>
+                             <option <?php echo $datacar["brand_id"]==$value["id"]?"selected":"" ?> value="<?php echo $value["id"] ?>"><?php echo $value["brand_name"] ?></option>
+                            <?php
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Tên sản phẩm<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="name">
+                    <input type="text" value="<?php echo $datacar["model_name"] ?>" class="form-control" name="name">
                 </div>
                 <div class="form-group">
                     <label for="">Giá sản phẩm<span class="text-danger">*</span></label>
-                    <input type="number" class="form-control" name="price">
+                    <input type="number" class="form-control" name="price"  value="<?php echo $datacar["price"] ?>">
                 </div>
                 <div class="form-group">
                     <label for="">Giảm giá</label>
-                    <input type="number" class="form-control" name="sale">
+                    <input type="number" class="form-control" name="sale" value="<?php echo $datacar["sale_price"] ?>">
                 </div>
                 <div class="form-group">
                     <label for="">Số lượng</label>
-                    <input type="number" class="form-control" name="quantity">
+                    <input type="number" class="form-control" name="quantity"  value="<?php echo $datacar["quantity"] ?>">
                 </div>
                 
             </div>
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-8 offset-2">
-                        <img id="preview-img" src="<?php echo BASE_URL?>public/images/default-image.jpg" class="img-fluid">
+                        <img id="preview-img" src="<?php echo BASE_URL.$datacar["image"]?>" class="img-fluid">
                     </div>
                 </div>
+                <input type="text" hidden name="id" value="<?php echo $id ?>">
                 <div class="form-group">
                     <label for="">Ảnh đại diện sản phẩm<span class="text-danger">*</span></label>
                     <input type="file" onchange="encodeImageFileAsURL(this)" class="form-control" name="image">
                 </div>
                 <div class="form-group">
                     <label for="">Thông tin chi tiết</label>
-                    <textarea name="detail" class="form-control" rows="9"></textarea>
+                    <textarea name="detail" class="form-control" rows="9"><?php echo $datacar["detail"] ?></textarea>
                 </div>
             </div>
             <div class="col-12 d-flex justify-content-end">
-                <button class="btn btn-primary" type="submit">Lưu</button>&nbsp;
+                <button class="btn btn-primary" type="submit">Cập nhật</button>&nbsp;
                 <a href="<?= BASE_URL ?>" class="btn btn-danger">Hủy</a>
             </div>
         </div>
@@ -161,6 +166,9 @@
                         data: {
                             name: function() {
                                 return $( "input[name='name']" ).val();
+                            },
+                            id: function(){
+                                return $( "input[name='id']" ).val();
                             }
                         }
                     }
@@ -181,7 +189,6 @@
                     min: 1
                 },
                 image: {
-                    required: true,
                     extension: "jpg|png|jpeg|gif"
                 }
             },
@@ -207,7 +214,6 @@
                     min: "Giá trị nhỏ nhất là 1"
                 },
                 image: {
-                    required: "Hãy chọn ảnh sản phẩm",
                     extension: "Hãy chọn file định dạng ảnh (jpg|png|jpeg|gif)"
                 }
             }

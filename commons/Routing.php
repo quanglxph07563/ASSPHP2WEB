@@ -25,8 +25,14 @@ class Routing
 
 
         $router->get('show-brands', ['Controllers\brandsController', 'index']);
-        $router->get('add-brand', ['Controllers\brandsController', 'addBrands']);
-        $router->get('edit-brand/{id:i}', ['Controllers\brandsController', 'editBrands']);
+        $router->get('add-brand', ['Controllers\brandsController', 'addBrand']);
+        $router->get('edit-brand/{id:i}', ['Controllers\brandsController', 'editBrand']);
+        $router->get('remove-edit-brand/{id:i}', ['Controllers\brandsController', 'removeBrand']);
+
+        $router->post('save-add-brand', ['Controllers\brandsController', 'saveAddBrand']);
+        $router->post('save-edit-brand', ['Controllers\brandsController', 'saveEditBrand']);
+        $router->post('check-brand-name', ['Controllers\brandsController', 'checkNameBrand']);
+
 
 
         $router->group(['prefix' => 'products'], function($router){

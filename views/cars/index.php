@@ -68,7 +68,7 @@
                 </td>
                 <td><?php echo $value["price"] ?>đ</td>
                 <td><?php echo $value["sale_price"] ?>đ</td>
-                <td>5</td>
+                <td><?php echo $value["quantity"] ?></td>
                 <td>
                     <a href="<?php echo BASE_URL ."edit-product/".$value["id"] ?>" class="btn btn-primary btn-sm ">Sửa</a>&nbsp;
                     <a href="<?php echo BASE_URL ."remove-edit-product/".$value["id"] ?>" class="btn btn-danger btn-sm btn-remove">Xóa</a>

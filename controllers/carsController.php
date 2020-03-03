@@ -43,8 +43,38 @@ class carsController{
     }
 
     public function editFormProduct($id){
-        $data = carsModels::findOne($id);
+        $datacar=carsModels::findOne($id);
+        $data=brandsModels::getAll();
         include_once './views/cars/edit_products.php';
+    }
+
+    public function editProduct(){
+        $id = $_POST['id'];
+        $datacar=carsModels::findOne($id);
+        if(!$datacar){
+            header("location: " . BASE_URL . "?msg=Sai thông tin mã sản phẩm");
+            die;
+        }
+        $filename = img_upload($_FILES['image']);
+        if($filename == null){
+            $filename = $datacar["image"];
+        }
+        
+        $data=[
+            "brand_id"=>$_POST["brand_id"],
+            "model_name"=>$_POST["name"],
+            "image"=>$filename,
+            "price"=>$_POST["price"],
+            "sale_price"=>$_POST["sale"],
+            "detail"=>$_POST["detail"],
+            "quantity"=>$_POST["quantity"]
+        ];
+        if(carsModels::updateData($data,"id",$id)){
+               
+            header("location:".BASE_URL."?msg=Cập nhật sản phẩm thành công");
+        }else{
+            echo "thất bại";
+        }
     }
 
     public function removeProduct($id){

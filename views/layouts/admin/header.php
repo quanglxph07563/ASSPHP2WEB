@@ -117,4 +117,5 @@
             </a>
         </li>
     </ul>
+    <input type="text" hidden id="msg" value="<?php echo $_GET["msg"] ?>" >
 </nav>

@@ -51,21 +51,27 @@
         </th>
         </thead>
         <tbody>
-      
-            <tr>
-                <td>1</td>
-                <td>Sản phẩm 1</td>
+      <?php
+      foreach ($data as $value) {
+          ?>
+           <tr>
+                <td><?php echo $value["id"] ?></td>
+                <td><?php echo $value["brand_name"] ?></td>
                 <td>
-                    <img src="{{BASE_URL . $pro->image}}" class="img-thumbnail">
+                    <img src="<?php echo BASE_URL . $value["logo"] ?>" class="img-thumbnail">
                 </td>
                 <td>
-                   Hà Nội
+                <?php echo $value["country"] ?>
                 </td>
                 <td>
-                    <a href="" class="btn btn-primary btn-sm ">Sửa</a>&nbsp;
-                    <a href="" class="btn btn-danger btn-sm btn-remove">Xóa</a>
+                    <a href="<?php echo BASE_URL ."edit-brand/".$value["id"] ?>" class="btn btn-primary btn-sm ">Sửa</a>&nbsp;
+                    <a href="<?php echo BASE_URL ."remove-edit-brand/".$value["id"] ?>" class="btn btn-danger btn-sm btn-remove">Xóa</a>
                 </td>
             </tr>
+          <?php
+      }
+      ?>
+           
    
         </tbody>
     </table>
@@ -100,7 +106,7 @@
             if($('#msg').length > 0){
                 Swal.fire({
                     position: 'bottom-end',
-                    icon: 'info',
+                    icon: 'success',
                     title: $('#msg').val(),
                     showConfirmButton: false,
                     timer: 1500
