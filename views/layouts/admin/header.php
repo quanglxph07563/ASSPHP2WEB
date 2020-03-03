@@ -117,5 +117,8 @@
             </a>
         </li>
     </ul>
-    <input type="text" hidden id="msg" value="<?php echo $_GET["msg"] ?>" >
+    <input type="text"  id="msg" value="<?php 
+    if(isset($_GET["msg"])){
+        echo $_GET["msg"];
+        }  ?>" >
 </nav>

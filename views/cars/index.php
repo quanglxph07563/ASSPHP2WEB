@@ -109,10 +109,10 @@
 <!-- @yield('script') -->
 <script>
         $(document).ready(function(){
-            if($('#msg').length > 0){
+            if($('#msg').val().length > 0){
                 Swal.fire({
                     position: 'bottom-end',
-                    icon: 'info',
+                    icon: 'success',
                     title: $('#msg').val(),
                     showConfirmButton: false,
                     timer: 1500
