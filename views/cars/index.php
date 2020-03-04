@@ -23,10 +23,37 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Dashboard</h1>
+                    <div class="col-sm-3">
+                        <h1 class="" class="m-0 text-dark">Dashboard</h1>              
                     </div><!-- /.col -->
-                    <div class="col-sm-6">
+                    <div class="col-sm-5 my-1">
+                        <div class="row">
+                        <select class="custom-select col-sm-5 " id="inlineFormCustomSelect" onchange="selectDanhmuc()">
+                            <option selected value="">Danh muc</option>
+                            <?php
+                        foreach ($dataDanhmuc as $value) {
+                            ?>
+                             <option value="<?php echo $value["id"] ?>"><?php echo $value["brand_name"] ?></option>
+                            <?php
+                        }
+                        ?>
+                            
+                        </select>
+                        <form class="form-inline  col-sm-6" >
+                            <div class="input-group input-group-sm" style="height: 100%">
+                                <input class="form-control form-control-navbar" style="height: 100%"  type="text" id="search" onkeyup="mySearch()" placeholder="Search" aria-label="Search">
+                            
+                                <div class="input-group-append">
+                                    <!-- <button class="btn btn-navbar" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button> -->
+                                </div>
+                            </div>
+                        </form>
+                        </div>
+                        </div>
+                       
+                    <div class="col-sm-4">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active">Dashboard v1</li>
@@ -53,7 +80,7 @@
             <a href="<?php echo BASE_URL?>add-product" class="btn btn-sm btn-success">Thêm</a>
         </th>
         </thead>
-        <tbody>
+        <tbody id="showdata">
       <?php
       foreach ($data as $value) {
         ?>
@@ -107,6 +134,33 @@
 <!-- @include('layouts.admin.script') -->
 <?php include './views/layouts/admin/script.php' ?>
 <!-- @yield('script') -->
+<script >
+
+        var mySearch = () => {
+          var keyword =  $("#search").val()
+          $.ajax({
+                url: '<?php echo BASE_URL."search-product-name" ?>',
+                type: 'POST',
+                dataType: 'html',
+                data: 'string=' + keyword
+            }).done(function(ketqua) {
+               $("#showdata").html(ketqua)
+            });
+         }
+
+         var selectDanhmuc = () => {
+          var keyword =  $("#inlineFormCustomSelect").val()
+          $.ajax({
+                url: '<?php echo BASE_URL."search-danh-muc" ?>',
+                type: 'POST',
+                dataType: 'html',
+                data: 'string=' + keyword
+            }).done(function(ketqua) {
+               $("#showdata").html(ketqua)
+            });
+         }
+    
+ </script>
 <script>
         $(document).ready(function(){
             if($('#msg').val().length > 0){

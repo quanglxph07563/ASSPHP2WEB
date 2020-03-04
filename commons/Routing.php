@@ -22,6 +22,8 @@ class Routing
         $router->post('save-add-product', ['Controllers\carsController', 'addProduct']);
         $router->post('save-edit-product', ['Controllers\carsController', 'editProduct']);
         $router->post('check-product-name', ['Controllers\carsController', 'checkNameExisted']);
+        $router->post('search-product-name', ['Controllers\carsController', 'searchName']);
+        $router->post('search-danh-muc', ['Controllers\carsController', 'searchDanhmuc']);
 
 
         $router->get('show-brands', ['Controllers\brandsController', 'index']);
