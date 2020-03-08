@@ -13,27 +13,27 @@ class Routing
         // $router->get('', function(){
         //     echo "helo";
         // });
-        $router->get('', ['Controllers\carsController', 'index']);
-        $router->get('add-product', ['Controllers\carsController', 'addFormProduct']);
-        $router->get('edit-product/{id:i}', ['Controllers\carsController', 'editFormProduct']);
-        $router->get('remove-edit-product/{id:i}', ['Controllers\carsController', 'removeProduct']);
+        $router->get('', ['Controllers\CarsController', 'index']);
+        $router->get('add-product', ['Controllers\CarsController', 'addFormProduct']);
+        $router->get('edit-product/{id:i}', ['Controllers\CarsController', 'editFormProduct']);
+        $router->get('remove-edit-product/{id:i}', ['Controllers\CarsController', 'removeProduct']);
+        $router->get('demo-layout', ["Controllers\CarsController", "demoLayout"]);
+
+        $router->post('save-add-product', ['Controllers\CarsController', 'addProduct']);
+        $router->post('save-edit-product', ['Controllers\CarsController', 'editProduct']);
+        $router->post('check-product-name', ['Controllers\CarsController', 'checkNameExisted']);
+        $router->post('search-product-name', ['Controllers\CarsController', 'searchName']);
+        $router->post('search-danh-muc', ['Controllers\CarsController', 'searchDanhmuc']);
 
 
-        $router->post('save-add-product', ['Controllers\carsController', 'addProduct']);
-        $router->post('save-edit-product', ['Controllers\carsController', 'editProduct']);
-        $router->post('check-product-name', ['Controllers\carsController', 'checkNameExisted']);
-        $router->post('search-product-name', ['Controllers\carsController', 'searchName']);
-        $router->post('search-danh-muc', ['Controllers\carsController', 'searchDanhmuc']);
+        $router->get('show-brands', ['Controllers\BrandsController', 'index']);
+        $router->get('add-brand', ['Controllers\BrandsController', 'addBrand']);
+        $router->get('edit-brand/{id:i}', ['Controllers\BrandsController', 'editBrand']);
+        $router->get('remove-edit-brand/{id:i}', ['Controllers\BrandsController', 'removeBrand']);
 
-
-        $router->get('show-brands', ['Controllers\brandsController', 'index']);
-        $router->get('add-brand', ['Controllers\brandsController', 'addBrand']);
-        $router->get('edit-brand/{id:i}', ['Controllers\brandsController', 'editBrand']);
-        $router->get('remove-edit-brand/{id:i}', ['Controllers\brandsController', 'removeBrand']);
-
-        $router->post('save-add-brand', ['Controllers\brandsController', 'saveAddBrand']);
-        $router->post('save-edit-brand', ['Controllers\brandsController', 'saveEditBrand']);
-        $router->post('check-brand-name', ['Controllers\brandsController', 'checkNameBrand']);
+        $router->post('save-add-brand', ['Controllers\BrandsController', 'saveAddBrand']);
+        $router->post('save-edit-brand', ['Controllers\BrandsController', 'saveEditBrand']);
+        $router->post('check-brand-name', ['Controllers\BrandsController', 'checkNameBrand']);
 
 
 

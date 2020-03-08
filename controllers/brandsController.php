@@ -1,65 +1,58 @@
 <?php
 namespace Controllers;
-use Models\brandsModels;
-class brandsController{
+use Models\BrandsModels;
+class BrandsController extends BaseController{
     public function index(){
-        $data=brandsModels::getAll();
-        include_once './views/brands/index.php';
+        $data=BrandsModels::all();
+        // include_once './views/brands/index.php';
+        $this->render('brands.index', compact('data'));
     }
 
     public function addBrand(){
-        include_once './views/brands/add_brands.php';
+        $this->render('brands.add_brade');
     }
 
     public function saveAddBrand(){
-        $data=[
-            "brand_name"=>$_POST["name"],
-            "logo"=>img_upload($_FILES['image']),
-            "country"=>$_POST["country"]
-        ];
-        
-        if(brandsModels::insertData($data)){
-           
-            header("location:".BASE_URL."show-brands?msg=Thêm thương hiệu thành công");
-        }else{
-            echo "thất bại";
+       $model= new BrandsModels();
+       $model->fill($_POST);
+       $image = $_FILES['image'];
+        $filename = "";
+        if($image['size'] > 0){
+            $filename = "public/images/" . uniqid() . '-' . $image['name'];
+            move_uploaded_file($image['tmp_name'], $filename);
         }
+        $model->logo = $filename;
+        $model->save();
+		header("location:".BASE_URL."show-brands?msg=Thêm danh mục thành công");
     }
 
     public function editBrand($id){
-        $databrand=brandsModels::findOne($id);
-        include_once './views/brands/edit_brands.php';
+        $databrand=BrandsModels::find($id);
+        $this->render("brands.edit_brade",compact('databrand'));
     }
 
     public function saveEditBrand(){
         $id = $_POST['id'];
-        $databrand=brandsModels::findOne($id);
+        $databrand=brandsModels::find($id);
         // dd($databrand);
         if(!$databrand){
             header("location: " . BASE_URL . "show-brands?msg=Sai thông tin mã thương hiệu");
             die;
         }
         $filename = img_upload($_FILES['image']);
-        if($filename == null){
-            $filename = $databrand["logo"];
+        if($filename != null){
+            $databrand->image = $filename;
         }
-        
-        $data=[
-            "brand_name"=>$_POST["name"],
-            "logo"=> $filename,
-            "country"=>$_POST["country"]
-        ];
-        if(brandsModels::updateData($data,"id",$id)){
-               
-            header("location:".BASE_URL."show-brands?msg=Cập nhật thương hiệu thành công");
-        }else{
-            echo "thất bại";
-        }
+
+        $databrand->fill($_POST);
+        $msg = $databrand->save() == true ? "Cập nhật thông tin sản phẩm thành công!" : "Cập nhật thông tin sản phẩm thất bại!";
+        header('location: ' . BASE_URL . "show-brands?msg=$msg");
+        die;
     }
 
 
     public function removeBrand($id){
-        if(brandsModels::destroy($id)){
+        if(BrandsModels::destroy($id)){
             header("location:".BASE_URL."show-brands?msg=Xóa thương hiệu thành công");
         };
         
@@ -67,14 +60,15 @@ class brandsController{
 
 
     public function checkNameBrand(){
-	    $name = $_POST['name'];
+	    $name = $_POST['brand_name'];
 	    $id = isset($_POST['id']) ? $_POST['id'] : -1;
-        $checkNameQuery = "select * from " . (new brandsModels())->table . " where brand_name = '$name'";
-        if($id != -1){
-            $checkNameQuery .= " and id != $id";
+	    $queryData = BrandsModels::where('brand_name',$name);
+	    if($id != -1){
+	        $queryData->where('id', '!=', $id);
         }
-        $data = brandsModels::customQuery($checkNameQuery);
-	    echo count($data) == 0 ? "true" : "false";
+        $numberRecord = $queryData->count();
+
+	    echo $numberRecord == 0 ? "true" : "false";
     }
 }
 ?>

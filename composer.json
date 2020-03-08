@@ -7,7 +7,9 @@
         }
     ],
     "require": {
-        "phroute/phroute": "^2.1"
+        "phroute/phroute": "^2.1",
+        "illuminate/database": "*",
+        "jenssegers/blade": "^1.2"
     },
     "autoload": {
         "psr-4": {
