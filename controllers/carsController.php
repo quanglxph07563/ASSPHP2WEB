@@ -6,14 +6,13 @@ class CarsController extends BaseController{
     public  function index(){   
         $data = CarsModels::all();
         $dataDanhmuc = BrandsModels::all();
-        $totalData = CarsModels::count();
         foreach ($data as $key => $value) {          
             $databrands = BrandsModels::where('id',  $value->brand_id)->first();
             $data[$key]->brand = $databrands ;
             
         }
         // include_once './views/cars/index.php';
-        $this->render('cars.index', compact('data','dataDanhmuc','totalData'));
+        $this->render('cars.index', compact('data','dataDanhmuc'));
         
     }
     public function demoLayout(){
@@ -117,8 +116,8 @@ class CarsController extends BaseController{
                 <td><?php echo number_format($value["sale_price"]) ?>đ</td>
               <td><?php echo $value["quantity"] ?></td>
               <td>
-                  <a href="<?php echo BASE_URL ."edit-product/".$value["id"] ?>" class="btn btn-primary btn-sm ">Sửa</a>&nbsp;
-                  <a href="<?php echo BASE_URL ."remove-edit-product/".$value["id"] ?>" class="btn btn-danger btn-sm btn-remove">Xóa</a>
+                  <a href="<?php echo BASE_URL ."products/edit-product/".$value["id"] ?>" class="btn btn-primary btn-sm ">Sửa</a>&nbsp;
+                  <a href="<?php echo BASE_URL ."products/remove-edit-product/".$value["id"] ?>" class="btn btn-danger btn-sm btn-remove">Xóa</a>
               </td>
           </tr>
       <?php
@@ -153,8 +152,8 @@ class CarsController extends BaseController{
                 <td><?php echo number_format($value["sale_price"]) ?>đ</td>
                <td><?php echo $value["quantity"] ?></td>
                <td>
-                   <a href="<?php echo BASE_URL ."edit-product/".$value["id"] ?>" class="btn btn-primary btn-sm ">Sửa</a>&nbsp;
-                   <a href="<?php echo BASE_URL ."remove-edit-product/".$value["id"] ?>" class="btn btn-danger btn-sm btn-remove">Xóa</a>
+                   <a href="<?php echo BASE_URL ."products/edit-product/".$value["id"] ?>" class="btn btn-primary btn-sm ">Sửa</a>&nbsp;
+                   <a href="<?php echo BASE_URL ."products/remove-edit-product/".$value["id"] ?>" class="btn btn-danger btn-sm btn-remove">Xóa</a>
                </td>
            </tr>
        <?php

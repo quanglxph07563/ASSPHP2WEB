@@ -23,7 +23,7 @@ class BrandsController extends BaseController{
         }
         $model->logo = $filename;
         $model->save();
-		header("location:".BASE_URL."show-brands?msg=Thêm danh mục thành công");
+		header("location:".BASE_URL."brand/show-brands?msg=Thêm danh mục thành công");
     }
 
     public function editBrand($id){
@@ -36,24 +36,24 @@ class BrandsController extends BaseController{
         $databrand=brandsModels::find($id);
         // dd($databrand);
         if(!$databrand){
-            header("location: " . BASE_URL . "show-brands?msg=Sai thông tin mã thương hiệu");
+            header("location: " . BASE_URL . "brand/show-brands?msg=Sai thông tin mã thương hiệu");
             die;
         }
         $filename = img_upload($_FILES['image']);
         if($filename != null){
-            $databrand->image = $filename;
+            $databrand->logo = $filename;
         }
 
         $databrand->fill($_POST);
         $msg = $databrand->save() == true ? "Cập nhật thông tin sản phẩm thành công!" : "Cập nhật thông tin sản phẩm thất bại!";
-        header('location: ' . BASE_URL . "show-brands?msg=$msg");
+        header('location: ' . BASE_URL . "brand/show-brands?msg=$msg");
         die;
     }
 
 
     public function removeBrand($id){
         if(BrandsModels::destroy($id)){
-            header("location:".BASE_URL."show-brands?msg=Xóa thương hiệu thành công");
+            header("location:".BASE_URL."brand/show-brands?msg=Xóa thương hiệu thành công");
         };
         
     }

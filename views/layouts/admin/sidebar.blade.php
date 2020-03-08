@@ -64,13 +64,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?php echo BASE_URL . "show-brands"?>" class="nav-link">
+                            <a href="{{BASE_URL . 'brand/show-brands'}}" class="nav-link">
                                 <i class="fa fa-list-ol nav-icon"></i>
                                 <p>Danh sách danh mục</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo BASE_URL . "add-brand"?>" class="nav-link">
+                            <a href="{{BASE_URL . 'brand/add-brand'}} " class="nav-link">
                                 <i class="fa fa-plus nav-icon"></i>
                                 <p>Tạo danh mục</p>
                             </a>
@@ -87,13 +87,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?php echo BASE_URL ?>" class="nav-link">
+                            <a href="{{BASE_URL}}" class="nav-link">
                                 <i class="fa fa-list-ol nav-icon"></i>
                                 <p>Danh sách sản phẩm</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo BASE_URL . "add-product"?>" class="nav-link">
+                            <a href="{{BASE_URL . 'products/add-product'}}" class="nav-link">
                                 <i class="fa fa-plus nav-icon"></i>
                                 <p>Tạo sản phẩm</p>
                             </a>

@@ -10,7 +10,7 @@
                 <th width="100">Image</th>
                 <th>country</th>
                 <th>
-                    <a href="<?php echo BASE_URL ?>add-brand" class="btn btn-sm btn-success">Thêm</a>
+                    <a href="<?php echo BASE_URL ?>brand/add-brand" class="btn btn-sm btn-success">Thêm</a>
                 </th>
             </thead>
             <tbody>
@@ -27,8 +27,8 @@
                         {{$value->country}}
                         </td>
                         <td>
-                            <a href=" {{ BASE_URL . 'edit-brand/' .$value->id}} " class="btn btn-primary btn-sm ">Sửa</a>&nbsp;
-                            <a href="{{ BASE_URL . 'remove-edit-brand/' .$value->id}}" class="btn btn-danger btn-sm btn-remove">Xóa</a>
+                            <a href=" {{ BASE_URL . 'brand/edit-brand/' .$value->id}} " class="btn btn-primary btn-sm ">Sửa</a>&nbsp;
+                            <a href="{{ BASE_URL . 'brand/remove-edit-brand/' .$value->id}}" class="btn btn-danger btn-sm btn-remove">Xóa</a>
                         </td>
                     </tr>
              @endforeach

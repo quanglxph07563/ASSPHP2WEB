@@ -14,7 +14,7 @@
                     </style>
 
 
-                    <form id="add-product-form" action="<?php echo e(BASE_URL . 'save-add-product'); ?>" method="post" enctype="multipart/form-data">
+                    <form id="add-product-form" action="<?php echo e(BASE_URL . 'products/save-add-product'); ?>" method="post" enctype="multipart/form-data">
                         <h3>Thêm mới sản phẩm</h3>
                         <div class="row">
                             <div class="col-md-6">
@@ -107,7 +107,7 @@
                         required: true,
                         minlength: 2,
                         remote: {
-                            url: "<?php echo e(BASE_URL . 'check-product-name'); ?> ",
+                            url: "<?php echo e(BASE_URL . 'products/check-product-name'); ?> ",
                             type: "post",
                             data: {
                                 name: function() {
@@ -121,7 +121,7 @@
                         number: true,
                         min: 1
                     },
-                    sale: {
+                    sale_price: {
                         required: true,
                         number: true,
                         min: 1
@@ -147,7 +147,7 @@
                         number: "Yêu cầu nhập số",
                         min: "Giá trị nhỏ nhất là 1"
                     },
-                    sale: {
+                    sale_price: {
                         required: "Nhập giá sản phẩm",
                         number: "Yêu cầu nhập số",
                         min: "Giá trị nhỏ nhất là 1"

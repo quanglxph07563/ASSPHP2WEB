@@ -1,6 +1,5 @@
 <?php
 namespace Models;
-use Models\baseModels;
 use Illuminate\Database\Eloquent\Model;
 class brandsModels extends Model{
     protected $table = "brands";

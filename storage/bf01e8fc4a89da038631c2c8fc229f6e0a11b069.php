@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', "Danh sách sản phẩm"); ?>
+<?php $__env->startSection('title', "Sửa sản phẩm"); ?>
 <?php $__env->startSection('content'); ?>
 <section class="content">
     <div class="container-fluid">
@@ -14,7 +14,7 @@
         </style>
 
 
-        <form id="add-product-form" action="<?php echo e(BASE_URL); ?>save-edit-product" method="post" enctype="multipart/form-data">
+        <form id="add-product-form" action="<?php echo e(BASE_URL); ?>products/save-edit-product" method="post" enctype="multipart/form-data">
             <h3>Cập nhật sản phẩm</h3>
             <div class="row">
                 <div class="col-md-6">
@@ -38,7 +38,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Giảm giá</label>
-                        <input type="number" class="form-control" name="sale" value="<?php echo e($datacar->sale_price); ?>">
+                        <input type="number" class="form-control" name="sale_price" value="<?php echo e($datacar->sale_price); ?>">
                     </div>
                     <div class="form-group">
                         <label for="">Số lượng</label>
@@ -102,7 +102,7 @@
                     required: true,
                     minlength: 2,
                     remote: {
-                        url: "<?= BASE_URL . 'check-product-name' ?>",
+                        url: "<?= BASE_URL . 'products/check-product-name' ?>",
                         type: "post",
                         data: {
                             name: function() {
@@ -119,7 +119,7 @@
                     number: true,
                     min: 1
                 },
-                sale: {
+                sale_price: {
                     required: true,
                     number: true,
                     min: 1
@@ -144,7 +144,7 @@
                     number: "Yêu cầu nhập số",
                     min: "Giá trị nhỏ nhất là 1"
                 },
-                sale: {
+                sale_price: {
                     required: "Nhập giá sản phẩm",
                     number: "Yêu cầu nhập số",
                     min: "Giá trị nhỏ nhất là 1"

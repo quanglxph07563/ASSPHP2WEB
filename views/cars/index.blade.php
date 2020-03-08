@@ -1,27 +1,11 @@
 @extends('layouts.admin')
 @section('title', "Danh sách sản phẩm")
 @section('content')
-<div class="row">
-<div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Tổng sản phẩm</span>
-              <span class="info-box-number">{{ $totalData }}</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        
-</div>
 <div class="row mb-3">
     <div class="col-sm-6">
         <div class="row">
         <select class="custom-select col-sm-4 " id="inlineFormCustomSelect" onchange="selectDanhmuc()">
-            <option selected value="">Tất cả</option>
-            
+            <option selected value="">Danh mục</option>           
             @foreach ($dataDanhmuc as $value)    
                 <option value="{{ $value->id}}">{{$value->brand_name}}</option>
             @endforeach
@@ -45,7 +29,7 @@
                 <th>Sales</th>
                 <th>Quantity</th>
                 <th>
-                    <a href="{{BASE_URL}}add-product" class="btn btn-sm btn-success">Thêm</a>
+                    <a href="{{BASE_URL}}products/add-product" class="btn btn-sm btn-success">Thêm</a>
                 </th>
             </thead>
             <tbody id="showdata">
@@ -60,12 +44,12 @@
                     <td>
                         {{ $value->brand->brand_name }}
                     </td>
-                    <td>{{ $value->price }}đ</td>
-                    <td>{{ $value->sale_price }}đ</td>
+                    <td>{{ number_format($value->price) }}đ</td>
+                    <td>{{ number_format($value->sale_price) }}đ</td>
                     <td>{{ $value->quantity }}</td>
                     <td>
-                        <a href="{{ BASE_URL .'edit-product/'.$value->id }}" class="btn btn-primary btn-sm ">Sửa</a>&nbsp;
-                        <a href=" {{ BASE_URL .'remove-edit-product/'.$value->id }}" class="btn btn-danger btn-sm btn-remove">Xóa</a>
+                        <a href="{{ BASE_URL .'products/edit-product/'.$value->id }}" class="btn btn-primary btn-sm ">Sửa</a>&nbsp;
+                        <a href=" {{ BASE_URL .'products/remove-edit-product/'.$value->id }}" class="btn btn-danger btn-sm btn-remove">Xóa</a>
                     </td>
                 </tr>
                 @endforeach
@@ -83,7 +67,7 @@
     var mySearch = () => {
         var keyword = $("#search").val()
         $.ajax({
-            url: '<?php echo BASE_URL . "search-product-name" ?>',
+            url: '<?php echo BASE_URL . "products/search-product-name" ?>',
             type: 'POST',
             dataType: 'html',
             data: 'string=' + keyword
@@ -95,7 +79,7 @@
     var selectDanhmuc = () => {
         var keyword = $("#inlineFormCustomSelect").val()
         $.ajax({
-            url: '<?php echo BASE_URL . "search-danh-muc" ?>',
+            url: '<?php echo BASE_URL . "products/search-danh-muc" ?>',
             type: 'POST',
             dataType: 'html',
             data: 'string=' + keyword
