@@ -122,7 +122,12 @@
                 sale_price: {
                     required: true,
                     number: true,
-                    min: 1
+                    min: 1,
+                    max:  function() {
+                                     if($( "input[name='price']" ).val()<$( "input[name='sale_price']" ).val()){
+                                       return $( "input[name='sale_price']" ).val("");
+                                     };
+                                }
                 },
                 quantity: {
                     required: true,
@@ -145,7 +150,7 @@
                     min: "Giá trị nhỏ nhất là 1"
                 },
                 sale_price: {
-                    required: "Nhập giá sản phẩm",
+                    required: "Số tiền sale phải nhỏ hơn số tiền ban đầu",
                     number: "Yêu cầu nhập số",
                     min: "Giá trị nhỏ nhất là 1"
                 },
